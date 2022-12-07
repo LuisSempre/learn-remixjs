@@ -6,6 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import styles from "./styles/app.css";
+import MainNavigation from "~/components/MainNavigation";
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
 
 export const meta = () => ({
   charset: "utf-8",
@@ -15,12 +21,15 @@ export const meta = () => ({
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <Meta />
         <Links />
       </head>
       <body>
+        <header>
+          <MainNavigation />
+        </header>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
