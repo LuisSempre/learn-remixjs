@@ -1,16 +1,18 @@
-import { NavLink } from '@remix-run/react'
+import { NavLink } from '@remix-run/react';
 
-export default function MainNavigation() {
+function MainNavigation() {
   return (
-    <nav className='flex h-full w-full max-w-4xl mx-auto'>
-      <ul className='flex justify-between items-center w-full'>
-        <li>
+    <nav id="main-navigation">
+      <ul>
+        <li className="nav-item">
           <NavLink to="/">Home</NavLink>
         </li>
-        <li>
+        <li className="nav-item">
           <NavLink to="/notes">My Notes</NavLink>
         </li>
       </ul>
     </nav>
-  )
+  );
 }
+
+export default MainNavigation;

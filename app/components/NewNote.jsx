@@ -1,24 +1,39 @@
-export default function NewNote() {
+import {
+  Form,
+  useActionData,
+  useTransition as useNavigation,
+} from '@remix-run/react';
+
+import styles from './NewNote.css';
+
+function NewNote() {
+  const data = useActionData();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === 'submitting';
 
   return (
-    <form
-      method="post"
-      action='/notes'
-      className='flex flex-col space-y-4'
-    >
+    <Form method="post" id="note-form">
+      {data?.message && <p>{data.message}</p>}
       <p>
-        <label htmlFor='title'>Title</label>
-        <input type='text' required id='title' className="border" name="title"/>
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" name="title" required />
       </p>
-      <p className='flex flex-col'>
-        <label htmlFor='content'>Content</label>
-        <textarea name='content' id='content' rows='5' required className='border' />
+      <p>
+        <label htmlFor="content">Content</label>
+        <textarea id="content" name="content" rows="5" required />
       </p>
-      <div>
-        <button className='bg-black text-white py-2 px-2 rounded-full'>
-          Add Note
+      <div className="form-actions">
+        <button disabled={isSubmitting}>
+          {isSubmitting ? 'Adding...' : 'Add Note'}
         </button>
       </div>
-    </form>
+    </Form>
   );
+}
+
+export default NewNote;
+
+export function links() {
+  return [{ rel: 'stylesheet', href: styles }];
 }
